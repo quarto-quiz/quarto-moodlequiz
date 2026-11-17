@@ -1,0 +1,8 @@
+/.quarto/
+*_files/
+*.xml
+!_extensions/moodlequiz/template.xml
+.DS_Store
+
+**/*.quarto_ipynb
+_dev/
