@@ -1,0 +1,29 @@
+title: Moodle Quiz
+author: Mitchell O'Hara-Wild
+version: 0.1.0
+quarto-required: ">=1.4.0"
+contributes:
+  shortcodes:
+    - cloze.lua
+  formats:
+    md:
+      # NOT `to: html`.
+      # question.lua renders each question's content to HTML itself
+      # (pandoc.write(..., "html")), so the document writer only ever has to
+      # pass raw HTML strings through unchanged; commonmark does that (via
+      # its raw_html passthrough) without Quarto's HTML5-reparse behaviour
+      # for computational (knitr/Jupyter) documents, which corrupts literal
+      # `<![CDATA[...]]>` content.
+      to: commonmark
+      output-ext: xml
+      template: template.xml
+      standalone: true
+      wrap: none
+      filters:
+        # Must run after shortcode expansion (post-quarto or later) so that
+        # header.lua can see the expanded {n:TYPE:...} cloze text when
+        # deciding a question's default type.
+        - at: post-quarto
+          path: header.lua
+        - at: post-quarto
+          path: question.lua
