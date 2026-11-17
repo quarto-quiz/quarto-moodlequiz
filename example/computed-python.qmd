@@ -1,0 +1,33 @@
+---
+title: Computed answers (Python)
+format: moodlequiz-md
+jupyter: python3
+---
+
+## Sample statistics
+
+```{python}
+#| include: false
+import random
+import statistics
+
+random.seed(1)
+x = [random.gauss(3.2, 0.4) for _ in range(100)]
+```
+
+A hundred samples were collected for analysis.
+
+```{python}
+round(statistics.mean(x), 3), round(statistics.stdev(x), 3)
+```
+
+Python has no inline-expression syntax equivalent to R's `` `r ...` ``, so a
+cell prints the shortcode text directly. `#| output: asis` tells Quarto to
+treat the cell's printed output as markdown (so the shortcode gets expanded)
+rather than as a literal code-output block:
+
+```{python}
+#| echo: false
+#| output: asis
+print(f"The mean of this sample is {{{{< cloze-numerical {statistics.mean(x):f} tolerance=0.5 >}}}}.")
+```

@@ -1,0 +1,70 @@
+---
+title: Example quiz
+format: moodlequiz-md
+moodlequiz:
+  category: example-quiz
+---
+
+# Basics
+
+## Where is the best coffee?
+
+This is a **short-answer** cloze question -- no code required, just write
+the shortcode directly in markdown.
+
+Where is the best coffee? {{< cloze-shortanswer "Melbourne" >}}
+
+## Where is Melbourne?
+
+`cloze()` auto-detects the question type from its answer. Given a set of
+`options`, a single answer becomes a single-choice question:
+
+Where is Melbourne? {{< cloze "Victoria" options="New South Wales,Victoria,Queensland,Western Australia" type=dropdown >}}
+
+## Select the lower-case letters
+
+...and multiple (comma-separated) answers become a multiple-choice
+question:
+
+Select all of the lower-case letters: {{< cloze-multichoice "a,g" options="a,F,g,V,K" >}}
+
+## What is 6 times 7?
+
+A numeric answer becomes a numerical question, with an optional tolerance:
+
+What is 6 times 7? {{< cloze 42 tolerance=0.5 >}}
+
+## Fill in the code
+
+Cloze shortcodes also work inside a fenced code block, for a
+"complete this code" style question (note a couple of small gotchas specific to this pattern):
+
+```
+sample_mean <- {{< cloze mean >}}(x)
+```
+
+# Native Moodle question types
+
+## Which of these is a prime number? {type=multichoice shuffleanswers=1}
+
+Any Moodle question type can be used directly with `{type=...}` on the
+question header; types needing answers use `::: {.answer fraction="..."}`
+fenced divs -- this is plain markdown, no shortcode involved.
+
+Which of these numbers is prime?
+
+::: {.answer fraction="100"}
+7
+:::
+
+::: {.answer fraction="0"}
+8
+:::
+
+::: {.answer fraction="0"}
+9
+:::
+
+## Discuss {type=essay}
+
+Discuss the difference between a population and a sample.

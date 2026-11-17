@@ -1,0 +1,35 @@
+---
+title: Computed answers (R)
+format: moodlequiz-md
+---
+
+## Sample statistics
+
+```{r}
+#| include: false
+set.seed(1)
+x <- rnorm(100, mean = 3.2, sd = 0.4)
+```
+
+A hundred samples were collected for analysis.
+
+```{r}
+summary(x)
+```
+
+The mean of this sample is `r sprintf("{{< cloze-numerical %f tolerance=0.5 >}}", mean(x))`,
+and the median is `r sprintf("{{< cloze-numerical %f tolerance=0.5 >}}", median(x))`.
+
+## Pick the right function
+
+Selecting from a set of computed choices works the same way -- build the
+shortcode call as a string and let it get expanded like any other:
+
+```{r}
+#| include: false
+options <- c("mean", "median", "sd", "var")
+answer <- "mean"
+```
+
+Which function computes the average of a numeric vector?
+`r sprintf('{{< cloze-singlechoice "%s" options="%s" >}}', answer, paste(options, collapse = ","))`
